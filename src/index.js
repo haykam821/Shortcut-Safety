@@ -1,8 +1,8 @@
 const shortcuts = require("shortcuts.js");
 
-const actions = require("./actions.js");
-const noopActions = Object.keys(actions).filter(key => {
-	return actions[key] === 0;
+const actionSafetyRatings = require("./actions.js");
+const noopActions = Object.keys(actionSafetyRatings).filter(key => {
+	return actionSafetyRatings[key] === 0;
 });
 
 class ShortcutSafetyRating {
@@ -34,7 +34,7 @@ module.exports.ShortcutSafetyRating = ShortcutSafetyRating;
  */
 function getActionSafety(action) {
 	const actionId = action instanceof shortcuts.Action ? action.identifier : action;
-	return actions[actionId];
+	return actionSafetyRatings[actionId];
 }
 module.exports.getActionSafety = getActionSafety;
 
@@ -46,7 +46,7 @@ module.exports.getActionSafety = getActionSafety;
 function shortcutSafety(shortcutMetadata) {
 	if (shortcutMetadata === undefined) {
 		throw new TypeError("The shortcutMetadata parameter is missing.");
-	} else if (!shortcutMetadata instanceof shortcuts.ShortcutMetadata) {
+	} else if (!(shortcutMetadata instanceof shortcuts.ShortcutMetadata)) {
 		throw new TypeError("The shortcutMetadata parameter must be an instance of ShortcutMetadata.");
 	}
 
@@ -54,7 +54,7 @@ function shortcutSafety(shortcutMetadata) {
 		return !noopActions.includes(action.identifier);
 	});
 	const safetyTotal = nonNoopActions.reduce((prev, item) => {
-		const safetyOfCurrentAction = actions[item.identifier];
+		const safetyOfCurrentAction = actionSafetyRatings[item.identifier];
 		if (safetyOfCurrentAction) {
 			prev[1][item.identifier] = safetyOfCurrentAction;
 			return [
@@ -65,7 +65,7 @@ function shortcutSafety(shortcutMetadata) {
 			return prev;
 		}
 	}, [0, {}]);
-	
+
 	return new ShortcutSafetyRating(safetyTotal[0] / nonNoopActions.length, safetyTotal[1], shortcutMetadata);
 }
 module.exports.getShortcutSafety = shortcutSafety;

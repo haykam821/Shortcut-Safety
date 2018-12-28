@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 module.exports = {
 	// 4 = probably used to send information to the attacker
 	"is.workflow.actions.runsshscript": 4,
