@@ -28,6 +28,17 @@ class ShortcutSafetyRating {
 module.exports.ShortcutSafetyRating = ShortcutSafetyRating;
 
 /**
+ * Gets the safety rating of an action.
+ * @param {(string|Action)} action The action to get the safety rating of.
+ * @returns {number}
+ */
+function getActionSafety(action) {
+	const actionId = action instanceof shortcuts.Action ? action.identifier : action;
+	return actions[actionId];
+}
+module.exports.getActionSafety = getActionSafety;
+
+/**
  * Gets the safety of a shortcut.
  * @param {ShortcutMetadata} shortcutMetadata The metadata of a shortcut to get the safety of.
  * @returns {ShortcutSafetyRating}
