@@ -15,5 +15,8 @@
 	"bugs": {
 		"url": "https://github.com/haykam821/Shortcut-Safety/issues"
 	},
-	"homepage": "https://github.com/haykam821/Shortcut-Safety#readme"
+	"homepage": "https://github.com/haykam821/Shortcut-Safety#readme",
+	"dependencies": {
+		"shortcuts.js": "^3.0.0"
+	}
 }
