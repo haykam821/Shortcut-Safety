@@ -13,6 +13,7 @@ module.exports = {
 	"is.workflow.actions.tweet": 3,
 	"net.whatsapp.WhatsApp.send": 3,
 	"is.workflow.actions.wordpress.post": 3,
+	"is.workflow.actions.runjavascriptonwebpage": 3,
 	// 2 = used for normal purposes, but should be cautious of
 	"is.workflow.actions.getipaddress": 2,
 	"is.workflow.actions.getdevicedetails": 2,
